@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vue Todoアプリ</title>
+  <link rel="stylesheet" href="style.css">  
+</head>
+<body>
+
+  <div id="app" class="todoapp">
+
+    <!-- header -->
+    <header class="header">
+      <h1>Todoリスト</h1>
+      <input class="new-todo" type="text" placeholder="やること">
+    </header>
+
+    <!-- main -->
+    <main class="main">
+      <ul class="todo-list">
+        <li class="todo">
+          <input type="checkbox" class="toggle">
+          <span>タスク1</span>
+          <button class="remove"></button>
+        </li>
+      </ul>
+    </main>
+
+    <!-- footer -->
+    <footer class="footer">
+      <span class="todo-count">0/1件 完了</span>
+      <ul class="filters">
+        <li><a href="#/all">すべて</a></li>
+        <li><a href="#/active">作業中</a></li>
+        <li><a href="#/completed">完了</a></li>
+      </ul>
+      <button class="clear-completed">完了したタスクを削除</button>
+    </footer>
+
+  </div><!-- /#app -->
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vue Todoアプリ</title>
+  <link rel="stylesheet" href="style.css">  
+</head>
+<body>
+
+  <div id="app" class="todoapp">
+
+    <!-- header -->
+    <header class="header">
+      <h1>Todoリスト</h1>
+      <input class="new-todo" type="text" placeholder="やること" v-model.trim="newTodo" @keyup.enter="addTodo">
+    </header>
+
+    <!-- main -->
+    <main class="main" v-show="todos.length" v-cloak>
+      <ul class="todo-list">
+        <li v-for="todo in filteredTodos" class="todo" :class="{ completed: todo.completed}">
+          <input type="checkbox" v-model="todo.completed" class="toggle">
+          <span>{{ todo.task }}</span>
+          <button class="remove" @click="removeTodo(todo)"></button>
+        </li>
+      </ul>
+    </main>
+
+    <!-- footer -->
+    <footer class="footer" v-show="todos.length" v-cloak>
+      <span class="todo-count">{{ completedNum }}/{{ todos.length }}件 完了</span>
+      <ul class="filters">
+        <li><a href="#/all" :class="{ selected: visibility == 'all' }">すべて</a></li>
+        <li><a href="#/active" :class="{ selected: visibility == 'active' }">作業中</a></li>
+        <li><a href="#/completed" :class="{ selected: visibility == 'completed' }">完了</a></li>
+      </ul>
+      <button class="clear-completed" @click="removeCompleted" v-show="completedNum">完了したタスクを削除</button>
+    </footer>
+
+  </div><!-- /#app -->
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
