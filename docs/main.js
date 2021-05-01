@@ -1,3 +1,19 @@
+// localStorage
+var STORAGE_KEY = "vue-todo";
+var todoStorage = {
+  fetch: function() {
+    var todos = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+    todos.forEach(function(todo, index) {
+      todo.id = index;
+    });
+    todoStorage.uid = todos.length;
+    return todos;
+  },
+  save: function(todos) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
+  }
+};
+
 // visibility filters
 var filters = {
   all: function(todos) {
@@ -19,9 +35,17 @@ var filters = {
 var app = new Vue({
   el: "#app",
   data: {
-    todos:[],
+    todos:todoStorage.fetch(),
     newTodo: "",
     visibility: "all"
+  },
+  watch: {
+    todos: {
+      handler: function(todos) {
+        todoStorage.save(todos);
+      },
+      deep: true
+    }
   },
   computed: {
     filteredTodos: function() {
@@ -34,10 +58,12 @@ var app = new Vue({
   methods: {
     addTodo: function() {
       var value = this.newTodo; 
-      if (value) {
-        this.todos.push({task: value, completed: false});
-        this.newTodo = "";
-      }
+      this.todos.push({
+        id: todoStorage.uid++,
+        task: value,
+        completed: false
+      });
+      this.newTodo = "";
     },
 
     removeTodo: function(todo) {

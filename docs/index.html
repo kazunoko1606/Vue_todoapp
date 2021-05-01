@@ -20,7 +20,7 @@
     <!-- main -->
     <main class="main" v-show="todos.length" v-cloak>
       <ul class="todo-list">
-        <li v-for="todo in filteredTodos" class="todo" :class="{ completed: todo.completed}">
+        <li v-for="todo in filteredTodos" class="todo" :key="todo.id" :class="{ completed: todo.completed}">
           <input type="checkbox" v-model="todo.completed" class="toggle">
           <span>{{ todo.task }}</span>
           <button class="remove" @click="removeTodo(todo)"></button>
