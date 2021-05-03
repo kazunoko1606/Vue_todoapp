@@ -58,6 +58,9 @@ var app = new Vue({
   methods: {
     addTodo: function() {
       var value = this.newTodo; 
+      if (!value) {
+        return;
+      }
       this.todos.push({
         id: todoStorage.uid++,
         task: value,
